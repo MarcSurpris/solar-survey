@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Jersey Energy Savings - Step 1</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="nav">
+        <a href="{{ url_for('survey_step1') }}" class="nav-link active">Survey</a>
+        <a href="{{ url_for('submissions') }}" class="nav-link">Submissions</a>
+        <a href="{{ url_for('restart') }}" class="nav-link">Restart Survey</a>
+    </nav>
+
+    <!-- Header -->
+    <header class="header text-center">
+        <img src="{{ url_for('static', filename='images/solar.jpg') }}" alt="Solar Icon" class="header-icon">
+        <center><h1>NEW JERSEY ENERGY SAVINGS</h1></center>
+        <B><center><p>SEE IF YOUR HOME QUALIFIES.<br>LIMITED TO 10 HOMES PER ZIP CODE.</p></center></B>
+    </header>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+        <div class="progress-step active">1</div>
+        <div class="progress-step">2</div>
+        <div class="progress-step">3</div>
+        <div class="progress-step">4</div>
+    </div>
+    <div class="progress-text">Step 1 of 4: Homeownership</div>
+
+    <!-- Form -->
+    <div class="container">
+        <div class="card">
+            <form method="POST" action="{{ url_for('survey_step1') }}">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    <label>{{ form.owns_home.label }}</label>
+                    <div class="radio-options">
+                        {% for choice in form.owns_home %}
+                            <label class="radio-label">
+                                {{ choice(class="form-control") }}
+                                {{ choice.label.text }}
+                            </label>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="button-group">
+                    {{ form.submit(class="btn btn-next") }}
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TrustedSite Badge -->
+    <div class="trustedsite-badge text-center">
+        <img src="{{ url_for('static', filename='images/trusted_site.png') }}" alt="TrustedSite Certified Secure">
+        <B><center><p>CERTIFIED SECURE</p></center></B>
+    </div>
+</body>
+</html>

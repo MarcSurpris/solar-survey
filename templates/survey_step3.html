@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Jersey Energy Savings - Step 3</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="nav">
+        <a href="{{ url_for('survey_step1') }}" class="nav-link active">Survey</a>
+        <a href="{{ url_for('submissions') }}" class="nav-link">Submissions</a>
+        <a href="{{ url_for('restart') }}" class="nav-link">Restart Survey</a>
+    </nav>
+
+    <!-- Header -->
+    <header class="header text-center">
+        <img src="{{ url_for('static', filename='images/solar.jpg') }}" alt="Solar Icon" class="header-icon">
+        <center><h1>NEW JERSEY ENERGY SAVINGS</h1></center>
+        <B><center><p>SEE IF YOUR HOME QUALIFIES.<br>LIMITED TO 10 HOMES PER ZIP CODE.</p></center></B>
+    </header>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+        <div class="progress-step completed">1</div>
+        <div class="progress-step completed">2</div>
+        <div class="progress-step active">3</div>
+        <div class="progress-step">4</div>
+    </div>
+    <div class="progress-text">Step 3 of 4: Credit Score</div>
+
+    <!-- Form -->
+    <div class="container">
+        <div class="card">
+            <form method="POST" action="{{ url_for('survey_step3') }}">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    <label>{{ form.credit_score.label }}</label>
+                    {{ form.credit_score(class="form-control", placeholder="Enter your credit score (300-850) or leave blank") }}
+                    {% if form.credit_score.errors %}
+                        <span class="error">{{ form.credit_score.errors[0] }}</span>
+                    {% endif %}
+                </div>
+                <div class="button-group">
+                    <a href="{{ url_for('survey_step2') }}" class="btn btn-back">Back</a>
+                    <a href="{{ url_for('survey_step4') }}" class="btn btn-skip">Skip</a>
+                    {{ form.submit(class="btn btn-next") }}
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TrustedSite Badge -->
+     <div class="trustedsite-badge text-center">
+        <img src="{{ url_for('static', filename='images/trusted_site.png') }}" alt="TrustedSite Certified Secure">
+        <B><center><p>CERTIFIED SECURE</p></center></B>
+    </div>
+</body>
+</html>
